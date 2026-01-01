@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptVision AI | Reverse Engineer AI Artwork</title>
+    <meta name="description"
+        content="The #1 AI Image Analyzer. Upload any AI-generated image to discover the exact prompts, models, and settings used.">
+    <meta name="theme-color" content="#7C3AED">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="assets/images/favicon.png">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://codingwithdodamani.github.io/PromptVision/">
+    <meta property="og:title" content="PromptVision AI | Reverse Engineer AI Artwork">
+    <meta property="og:description"
+        content="The #1 AI Image Analyzer. Upload any AI-generated image to discover the exact prompts, models, and settings used.">
+    <meta property="og:image" content="https://codingwithdodamani.github.io/PromptVision/assets/images/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://codingwithdodamani.github.io/PromptVision/">
+    <meta name="twitter:title" content="PromptVision AI | Reverse Engineer AI Artwork">
+    <meta name="twitter:description"
+        content="The #1 AI Image Analyzer. Upload any AI-generated image to discover the exact prompts, models, and settings used.">
+    <meta name="twitter:image" content="https://codingwithdodamani.github.io/PromptVision/assets/images/og-image.png">
+
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="antialiased mesh-bg">
+
+    <!-- Floating Particles -->
+    <div id="particles" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 inset-x-0 z-50 py-3 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="glass rounded-2xl px-5 py-2.5 flex items-center justify-between">
+                <a href="#home" class="flex items-center gap-2 group">
+                    <div
+                        class="w-10 h-10 gradient-bg-primary rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform pulse-glow">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <span class="font-bold text-xl gradient-text hidden sm:block">PromptVision</span>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-1">
+                    <a href="#analyzer"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Analyzer</a>
+                    <a href="#gallery"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Gallery</a>
+                    <a href="#faq"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">FAQ</a>
+                    <div class="w-px h-5 mx-2" style="background: var(--border-color)"></div>
+                    <a href="about.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">About</a>
+                    <a href="pricing.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Pricing</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme"></button>
+                    <a href="#analyzer"
+                        class="btn-primary text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
+                        <i class="fas fa-bolt"></i> <span class="hidden sm:inline">Try Now</span>
+                    </a>
+                    <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg" style="color: var(--text-secondary)"
+                        onclick="document.getElementById('mobileMenu').classList.remove('translate-x-full'); document.getElementById('menuOverlay').classList.remove('hidden')">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="fixed inset-y-0 right-0 w-72 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col p-6"
+            style="background: var(--bg-secondary)">
+            <div class="flex items-center justify-between mb-8">
+                <span class="font-bold text-lg" style="color: var(--text-primary)">Menu</span>
+                <button id="closeMobileMenu"
+                    onclick="document.getElementById('mobileMenu').classList.add('translate-x-full'); document.getElementById('menuOverlay').classList.add('hidden')"
+                    class="w-8 h-8 rounded-full flex items-center justify-center"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="#analyzer" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-magic w-5 text-purple-500"></i> Analyzer</a>
+                <a href="#gallery" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-images w-5 text-pink-500"></i> Gallery</a>
+                <a href="#models" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-robot w-5 text-cyan-500"></i> Models</a>
+                <a href="#faq" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-question-circle w-5 text-amber-500"></i> FAQ</a>
+
+                <hr class="my-3 border-t" style="border-color: var(--border-color)">
+
+                <a href="about.html" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-user w-5 text-green-500"></i> About</a>
+                <a href="pricing.html" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-tag w-5 text-orange-500"></i> Pricing</a>
+                <a href="changelog.html" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-code-branch w-5 text-blue-500"></i>
+                    Changelog</a>
+                <a href="privacy.html" class="mobile-link p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-shield-halved w-5 text-red-500"></i> Privacy</a>
+            </div>
+        </div>
+        <div id="menuOverlay"
+            onclick="document.getElementById('mobileMenu').classList.add('translate-x-full'); this.classList.add('hidden')"
+            class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-28 pb-16 overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+
+                <!-- Left: Content -->
+                <div class="text-center lg:text-left">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 glass rounded-full py-2 px-5 mb-6 animate-fade-in">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs font-semibold uppercase tracking-wide" style="color: var(--text-muted)">🔥
+                            #1 AI Image Decoder</span>
+                    </div>
+
+                    <!-- Tagline -->
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-[1.1] animate-fade-in"
+                        style="animation-delay: 0.1s;">
+                        <span style="color: var(--text-primary)">See The</span><br>
+                        <span class="gradient-text gradient-animate">Prompt Behind</span><br>
+                        <span style="color: var(--text-primary)">Any AI Art</span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-lg md:text-xl mb-8 max-w-lg mx-auto lg:mx-0 animate-fade-in"
+                        style="animation-delay: 0.2s; color: var(--text-secondary)">
+                        Upload any AI image → Get the <strong class="gradient-text">exact prompt</strong>, model, and
+                        settings in seconds. Like magic, but it's AI. ✨
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 animate-fade-in"
+                        style="animation-delay: 0.3s;">
+                        <a href="#analyzer"
+                            class="btn-primary text-white px-8 py-4 rounded-2xl font-bold text-lg flex items-center gap-3 shadow-xl w-full sm:w-auto justify-center group">
+                            <i class="fas fa-wand-magic-sparkles group-hover:rotate-12 transition-transform"></i>
+                            Try Free Now
+                        </a>
+                        <a href="#gallery"
+                            class="glass px-6 py-4 rounded-2xl font-semibold flex items-center gap-3 w-full sm:w-auto justify-center"
+                            style="color: var(--text-primary)">
+                            <i class="fas fa-play-circle text-purple-500"></i> Watch Demo
+                        </a>
+                    </div>
+
+                    <!-- Stats Row -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-8 mt-10 animate-fade-in"
+                        style="animation-delay: 0.4s;">
+                        <div class="text-center lg:text-left">
+                            <div class="text-2xl font-bold gradient-text">1M+</div>
+                            <div class="text-xs" style="color: var(--text-muted)">Images Analyzed</div>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <div class="text-2xl font-bold gradient-text">95%</div>
+                            <div class="text-xs" style="color: var(--text-muted)">Accuracy Rate</div>
+                        </div>
+                        <!-- Glowing Limited Time Offer -->
+                        <div class="relative group">
+                            <!-- Glow background -->
+                            <div class="absolute -inset-2 rounded-xl blur-lg opacity-75 animate-pulse"
+                                style="background: linear-gradient(45deg, #10B981, #34D399, #10B981);"></div>
+                            <!-- Card -->
+                            <div class="relative px-4 py-2 rounded-xl text-center lg:text-left"
+                                style="background: var(--bg-primary); border: 2px solid #10B981;">
+                                <div class="absolute -top-2 -right-2 flex items-center justify-center">
+                                    <span class="absolute w-4 h-4 rounded-full animate-ping"
+                                        style="background: #10B981; opacity: 0.5;"></span>
+                                    <span class="relative w-3 h-3 rounded-full" style="background: #10B981;"></span>
+                                </div>
+                                <div class="text-xl font-black" style="color: #10B981;">🔥 FREE</div>
+                                <div class="text-[10px] font-bold uppercase tracking-wide" style="color: #34D399;">⚡
+                                    Limited Time Only!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: SVG Illustration -->
+                <div class="relative flex items-center justify-center animate-fade-in" style="animation-delay: 0.3s;">
+                    <!-- Main SVG Illustration -->
+                    <div class="relative w-full max-w-lg">
+                        <svg viewBox="0 0 500 400" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Glow -->
+                            <defs>
+                                <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#7C3AED" />
+                                    <stop offset="50%" style="stop-color:#DB2777" />
+                                    <stop offset="100%" style="stop-color:#F59E0B" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur" />
+                                        <feMergeNode in="SourceGraphic" />
+                                    </feMerge>
+                                </filter>
+                            </defs>
+
+                            <!-- Image Frame -->
+                            <rect x="50" y="50" width="200" height="200" rx="20" fill="var(--bg-tertiary)"
+                                stroke="var(--border-color)" stroke-width="2" class="float" />
+
+                            <!-- Fake Image Inside -->
+                            <rect x="65" y="65" width="170" height="125" rx="10" fill="url(#heroGrad)" opacity="0.8" />
+                            <circle cx="100" cy="100" r="15" fill="white" opacity="0.5" />
+                            <path d="M75 175 L120 140 L150 160 L200 120 L220 175 Z" fill="white" opacity="0.3" />
+
+                            <!-- Scanning Line Animation -->
+                            <rect x="65" y="70" width="170" height="3" fill="white" opacity="0.8">
+                                <animate attributeName="y" values="70;180;70" dur="2s" repeatCount="indefinite" />
+                            </rect>
+
+                            <!-- AI Chip -->
+                            <g transform="translate(280, 80)" class="float" style="animation-delay: 0.5s;">
+                                <rect width="150" height="100" rx="15" fill="var(--bg-secondary)"
+                                    stroke="url(#heroGrad)" stroke-width="2" filter="url(#glow)" />
+                                <text x="75" y="35" text-anchor="middle" fill="url(#heroGrad)" font-size="12"
+                                    font-weight="bold">AI ANALYSIS</text>
+                                <text x="75" y="55" text-anchor="middle" fill="var(--text-muted)"
+                                    font-size="10">Processing...</text>
+                                <!-- Progress Bar -->
+                                <rect x="20" y="70" width="110" height="8" rx="4" fill="var(--bg-tertiary)" />
+                                <rect x="20" y="70" width="80" height="8" rx="4" fill="url(#heroGrad)">
+                                    <animate attributeName="width" values="20;110;20" dur="2s"
+                                        repeatCount="indefinite" />
+                                </rect>
+                            </g>
+
+                            <!-- Output Prompt Card -->
+                            <g transform="translate(180, 220)" class="float" style="animation-delay: 1s;">
+                                <rect width="270" height="130" rx="15" fill="var(--bg-secondary)"
+                                    stroke="url(#heroGrad)" stroke-width="2" filter="url(#glow)" />
+                                <text x="20" y="30" fill="var(--text-muted)" font-size="10" font-weight="600">DISCOVERED
+                                    PROMPT</text>
+                                <text x="20" y="55" fill="var(--text-primary)" font-size="11">"cyberpunk
+                                    portrait,</text>
+                                <text x="20" y="72" fill="var(--text-primary)" font-size="11">neon lights, 8k..."</text>
+                                <rect x="20" y="90" width="60" height="20" rx="10" fill="url(#heroGrad)"
+                                    opacity="0.2" />
+                                <text x="50" y="104" text-anchor="middle" fill="url(#heroGrad)" font-size="9"
+                                    font-weight="bold">MJ v5.2</text>
+                                <rect x="90" y="90" width="50" height="20" rx="10" fill="#10B981" opacity="0.2" />
+                                <text x="115" y="104" text-anchor="middle" fill="#10B981" font-size="9"
+                                    font-weight="bold">94%</text>
+                            </g>
+
+                            <!-- Connecting Lines -->
+                            <path d="M250 150 C280 150, 280 130, 280 130" stroke="url(#heroGrad)" stroke-width="2"
+                                fill="none" stroke-dasharray="5,5">
+                                <animate attributeName="stroke-dashoffset" values="10;0" dur="1s"
+                                    repeatCount="indefinite" />
+                            </path>
+                            <path d="M355 180 C355 220, 355 220, 355 220" stroke="url(#heroGrad)" stroke-width="2"
+                                fill="none" stroke-dasharray="5,5">
+                                <animate attributeName="stroke-dashoffset" values="10;0" dur="1s"
+                                    repeatCount="indefinite" />
+                            </path>
+
+                            <!-- Floating Sparkles -->
+                            <circle cx="80" cy="280" r="4" fill="#FBBF24" opacity="0.8">
+                                <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="450" cy="100" r="3" fill="#7C3AED" opacity="0.8">
+                                <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.5s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="400" cy="350" r="5" fill="#F43F5E" opacity="0.6">
+                                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Blobs -->
+        <div class="absolute top-20 left-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style="background: var(--primary);"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-15 blur-3xl"
+            style="background: var(--secondary);"></div>
+    </section>
+
+    <!-- The Problem We Solve -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-10 reveal">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3"
+                        style="background: rgba(239, 68, 68, 0.1); color: #EF4444;">
+                        <i class="fas fa-lightbulb"></i> The Problem
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-black mb-2" style="color: var(--text-primary)">
+                        Ever Seen Amazing AI Art & Wondered...
+                    </h2>
+                    <p class="text-base" style="color: var(--text-secondary)">
+                        "How did they create this? What prompt did they use?"
+                    </p>
+                </div>
+
+                <!-- Pain Points + Before/After in one row -->
+                <div class="glass-card rounded-2xl p-6 reveal">
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="text-center p-4">
+                            <div class="w-12 h-12 mx-auto mb-2 rounded-full flex items-center justify-center text-xl"
+                                style="background: rgba(239, 68, 68, 0.1); color: #EF4444;">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <h3 class="font-bold text-sm mb-1" style="color: var(--text-primary)">Creators Don't Share
+                            </h3>
+                            <p class="text-xs" style="color: var(--text-muted)">Prompts kept secret</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="w-12 h-12 mx-auto mb-2 rounded-full flex items-center justify-center text-xl"
+                                style="background: rgba(239, 68, 68, 0.1); color: #EF4444;">
+                                <i class="fas fa-file-image"></i>
+                            </div>
+                            <h3 class="font-bold text-sm mb-1" style="color: var(--text-primary)">No Metadata</h3>
+                            <p class="text-xs" style="color: var(--text-muted)">Lost after saving</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="w-12 h-12 mx-auto mb-2 rounded-full flex items-center justify-center text-xl"
+                                style="background: rgba(239, 68, 68, 0.1); color: #EF4444;">
+                                <i class="fas fa-dice"></i>
+                            </div>
+                            <h3 class="font-bold text-sm mb-1" style="color: var(--text-primary)">Endless Guessing</h3>
+                            <p class="text-xs" style="color: var(--text-muted)">Trial and error</p>
+                        </div>
+                    </div>
+
+                    <!-- Before/After -->
+                    <div class="grid md:grid-cols-2 gap-4 pt-4 border-t" style="border-color: var(--border-color)">
+                        <div class="text-center p-4 rounded-xl" style="background: rgba(239, 68, 68, 0.03);">
+                            <span class="text-2xl">😩</span>
+                            <p class="text-sm mt-1" style="color: var(--text-muted)"><strong
+                                    style="color: #EF4444">Before:</strong> "I wish I knew..."</p>
+                        </div>
+                        <div class="text-center p-4 rounded-xl" style="background: rgba(16, 185, 129, 0.03);">
+                            <span class="text-2xl">🎉</span>
+                            <p class="text-sm mt-1" style="color: var(--text-primary)"><strong
+                                    style="color: #10B981">After:</strong> "Now I know how!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Samples -->
+    <section class="py-12" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-8 reveal">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3"
+                        style="background: rgba(124, 58, 237, 0.1); color: var(--primary)">
+                        <i class="fas fa-images"></i> See It In Action
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-black" style="color: var(--text-primary)">Demo Samples</h2>
+                    <p class="text-sm mt-2" style="color: var(--text-secondary)">Click any sample to see how
+                        PromptVision analyzes it</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4">
+                    <!-- Sample 1: Fantasy -->
+                    <div class="glass-card rounded-xl overflow-hidden group cursor-pointer hover:scale-[1.02] transition-all reveal"
+                        onclick="loadSampleImage('assets/images/sample-fantasy.png')">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="assets/images/sample-fantasy.png" alt="Fantasy AI Art"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2 py-0.5 rounded text-xs font-medium"
+                                    style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6">Midjourney</span>
+                                <span class="px-2 py-0.5 rounded text-xs"
+                                    style="background: var(--bg-tertiary); color: var(--text-muted)">Fantasy</span>
+                            </div>
+                            <p class="text-xs line-clamp-2" style="color: var(--text-secondary)">"Magical glowing
+                                forest, ethereal creatures, bioluminescent..."</p>
+                        </div>
+                    </div>
+
+                    <!-- Sample 2: Portrait -->
+                    <div class="glass-card rounded-xl overflow-hidden group cursor-pointer hover:scale-[1.02] transition-all reveal"
+                        style="animation-delay: 0.1s" onclick="loadSampleImage('assets/images/sample-portrait.png')">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="assets/images/sample-portrait.png" alt="Cyberpunk Portrait"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2 py-0.5 rounded text-xs font-medium"
+                                    style="background: rgba(236, 72, 153, 0.1); color: #EC4899">DALL-E 3</span>
+                                <span class="px-2 py-0.5 rounded text-xs"
+                                    style="background: var(--bg-tertiary); color: var(--text-muted)">Portrait</span>
+                            </div>
+                            <p class="text-xs line-clamp-2" style="color: var(--text-secondary)">"Cyberpunk woman, neon
+                                lights, dramatic lighting, photorealistic..."</p>
+                        </div>
+                    </div>
+
+                    <!-- Sample 3: Landscape -->
+                    <div class="glass-card rounded-xl overflow-hidden group cursor-pointer hover:scale-[1.02] transition-all reveal"
+                        style="animation-delay: 0.2s" onclick="loadSampleImage('assets/images/sample-landscape.png')">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="assets/images/sample-landscape.png" alt="Anime Landscape"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2 py-0.5 rounded text-xs font-medium"
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10B981">Stable Diffusion</span>
+                                <span class="px-2 py-0.5 rounded text-xs"
+                                    style="background: var(--bg-tertiary); color: var(--text-muted)">Anime</span>
+                            </div>
+                            <p class="text-xs line-clamp-2" style="color: var(--text-secondary)">"Japanese landscape,
+                                cherry blossoms, Mt Fuji, Studio Ghibli..."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analyzer Section -->
+    <section id="analyzer" class="py-20 relative" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 reveal">
+                <span class="font-semibold text-sm uppercase tracking-wider" style="color: var(--primary)">AI
+                    Analyzer</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2" style="color: var(--text-primary)">Upload & Decode</h2>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Upload Card -->
+                <div class="glass-card rounded-3xl p-8 glow mb-8 reveal">
+                    <div id="dropZone" class="drop-zone rounded-2xl p-8 text-center cursor-pointer group">
+                        <input type="file" id="fileInput" class="hidden" accept="image/*">
+
+                        <div id="uploadPlaceholder">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform float"
+                                style="background: rgba(124, 58, 237, 0.1); color: var(--primary)">
+                                <i class="fas fa-cloud-upload-alt text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary)">Drop your image here
+                            </h3>
+                            <p class="mb-4" style="color: var(--text-secondary)">or click to browse • paste <kbd
+                                    class="px-2 py-1 rounded text-xs"
+                                    style="background: var(--bg-tertiary)">Ctrl+V</kbd></p>
+
+                            <!-- URL Input -->
+                            <div class="flex items-center gap-2 max-w-md mx-auto mt-6">
+                                <div class="flex-1 relative">
+                                    <i class="fas fa-link absolute left-4 top-1/2 -translate-y-1/2"
+                                        style="color: var(--text-muted)"></i>
+                                    <input type="text" id="urlInput" placeholder="Or paste image URL..."
+                                        class="w-full pl-10 pr-4 py-3 rounded-xl text-sm border focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                        style="background: var(--bg-secondary); border-color: var(--border-color); color: var(--text-primary)"
+                                        onclick="event.stopPropagation()">
+                                </div>
+                                <button
+                                    onclick="event.stopPropagation(); loadImageFromUrl(document.getElementById('urlInput').value)"
+                                    class="btn-primary text-white px-5 py-3 rounded-xl font-semibold">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="uploadPreview" class="hidden">
+                            <div id="previewGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-lg mx-auto"></div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div id="uploadControls" class="hidden flex justify-center gap-4 mt-6">
+                        <button id="analyzeBtn"
+                            class="btn-primary text-white px-8 py-3 rounded-xl font-bold flex items-center gap-2">
+                            <i class="fas fa-wand-magic-sparkles"></i> Analyze Image
+                        </button>
+                        <button id="clearBtn"
+                            class="btn-secondary px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+
+                    <!-- Progress -->
+                    <div id="progressSection" class="hidden mt-8">
+                        <div class="flex flex-col items-center text-center py-6">
+                            <div class="relative w-24 h-24 mb-4">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="48" cy="48" r="42" stroke="var(--border-color)" stroke-width="6"
+                                        fill="none"></circle>
+                                    <circle id="progressCircle" cx="48" cy="48" r="42" stroke="url(#gradient)"
+                                        stroke-width="6" fill="none" stroke-dasharray="264" stroke-dashoffset="264"
+                                        class="transition-all duration-500"></circle>
+                                    <defs>
+                                        <linearGradient id="gradient">
+                                            <stop offset="0%" stop-color="#7C3AED" />
+                                            <stop offset="100%" stop-color="#F43F5E" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <span id="progressPercent"
+                                    class="absolute inset-0 flex items-center justify-center text-2xl font-bold gradient-text">0%</span>
+                            </div>
+                            <p id="progressText" class="font-medium" style="color: var(--text-secondary)">Analyzing...
+                            </p>
+
+                            <div class="w-full max-w-sm mt-6 space-y-2 text-left">
+                                <div class="flex items-center gap-3 p-3 rounded-lg" data-step="detect">
+                                    <div class="step-icon w-6 h-6 flex items-center justify-center"><i
+                                            class="fas fa-circle text-xs" style="color: var(--border-color)"></i></div>
+                                    <span class="text-sm" style="color: var(--text-secondary)">Identifying AI
+                                        Model</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 rounded-lg" data-step="style">
+                                    <div class="step-icon w-6 h-6 flex items-center justify-center"><i
+                                            class="fas fa-circle text-xs" style="color: var(--border-color)"></i></div>
+                                    <span class="text-sm" style="color: var(--text-secondary)">Analyzing Art
+                                        Style</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 rounded-lg" data-step="subject">
+                                    <div class="step-icon w-6 h-6 flex items-center justify-center"><i
+                                            class="fas fa-circle text-xs" style="color: var(--border-color)"></i></div>
+                                    <span class="text-sm" style="color: var(--text-secondary)">Extracting Prompt</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="resultsSection" class="hidden">
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <!-- Image -->
+                        <div class="glass-card rounded-2xl p-4 reveal-scale">
+                            <img id="analyzedImage" src="" class="w-full rounded-xl shadow-lg" alt="Analyzed">
+                        </div>
+
+                        <!-- Prompt -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="glass-card rounded-2xl p-6 reveal-scale">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-lg flex items-center gap-2"
+                                        style="color: var(--text-primary)">
+                                        <i class="fas fa-sparkles text-purple-500"></i> Discovered Prompt
+                                    </h3>
+                                    <span id="resultConfidence"
+                                        class="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">94%
+                                        match</span>
+                                </div>
+                                <div class="glow-border rounded-xl p-5 relative group"
+                                    style="background: var(--bg-tertiary)">
+                                    <p id="resultPrompt" class="font-mono text-sm leading-relaxed"
+                                        style="color: var(--text-primary)"></p>
+                                    <button onclick="copyToClipboard(document.getElementById('resultPrompt').innerText)"
+                                        class="absolute top-3 right-3 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition btn-secondary">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <div id="resultTags" class="flex flex-wrap gap-2 mt-4"></div>
+                            </div>
+
+                            <!-- Model & Actions -->
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="glass-card rounded-2xl p-5 reveal-scale">
+                                    <h4 class="font-bold text-sm mb-3 flex items-center gap-2"
+                                        style="color: var(--text-primary)">
+                                        <i class="fas fa-robot text-purple-500"></i> Detected Model
+                                    </h4>
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="w-12 h-12 gradient-bg-primary rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                                            MJ</div>
+                                        <div>
+                                            <p id="resultModel" class="font-bold" style="color: var(--text-primary)">
+                                                Midjourney v5.2</p>
+                                            <p class="text-xs" style="color: var(--text-muted)">High confidence</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass-card rounded-2xl p-5 reveal-scale">
+                                    <h4 class="font-bold text-sm mb-3 flex items-center gap-2"
+                                        style="color: var(--text-primary)">
+                                        <i class="fas fa-minus-circle text-red-500"></i> Negative Prompt
+                                    </h4>
+                                    <p id="resultNegative" class="text-sm" style="color: var(--text-secondary)">blurry,
+                                        low quality...</p>
+                                </div>
+                            </div>
+
+                            <!-- Export Actions -->
+                            <div class="flex flex-wrap gap-3">
+                                <button id="exportPngBtn"
+                                    class="flex-1 btn-secondary flex items-center justify-center gap-2 p-3 rounded-xl font-medium">
+                                    <i class="fas fa-image text-purple-500"></i> Export PNG
+                                </button>
+                                <button id="exportJsonBtn"
+                                    class="flex-1 btn-secondary flex items-center justify-center gap-2 p-3 rounded-xl font-medium">
+                                    <i class="fas fa-code text-blue-500"></i> Export JSON
+                                </button>
+                                <button id="shareBtn"
+                                    class="flex-1 btn-secondary flex items-center justify-center gap-2 p-3 rounded-xl font-medium">
+                                    <i class="fas fa-share-alt text-pink-500"></i> Share
+                                </button>
+                                <button id="variationsBtn"
+                                    class="flex-1 btn-primary text-white flex items-center justify-center gap-2 p-3 rounded-xl font-medium">
+                                    <i class="fas fa-shuffle"></i> Variations
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Variations -->
+                    <div id="variationsSection" class="hidden mt-8 glass-card rounded-2xl p-6 reveal-scale">
+                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+                            <i class="fas fa-random text-purple-500"></i> Prompt Variations
+                        </h3>
+                        <div id="variationsList" class="grid md:grid-cols-2 gap-4"></div>
+                    </div>
+                </div>
+
+                <!-- History -->
+                <div id="historySection" class="hidden mt-8 glass-card rounded-2xl p-6">
+                    <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+                        <i class="fas fa-history text-purple-500"></i> Recent Analyses
+                    </h3>
+                    <div id="historyList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20" style="background: var(--bg-primary)">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 reveal">
+                <span class="font-semibold text-sm uppercase tracking-wider"
+                    style="color: var(--primary)">Gallery</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2" style="color: var(--text-primary)">Analyzed Artworks
+                </h2>
+                <p class="mt-3 max-w-xl mx-auto" style="color: var(--text-secondary)">See what others have discovered
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                <div class="gallery-item reveal-scale">
+                    <img src="https://picsum.photos/400/400?random=1" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">Midjourney v5</p>
+                        <p class="text-white/70 text-xs">Cyberpunk Portrait</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-scale" style="animation-delay: 0.1s;">
+                    <img src="https://picsum.photos/400/400?random=2" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">DALL-E 3</p>
+                        <p class="text-white/70 text-xs">Fantasy Landscape</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-scale" style="animation-delay: 0.2s;">
+                    <img src="https://picsum.photos/400/400?random=3" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">Stable Diffusion</p>
+                        <p class="text-white/70 text-xs">Abstract Art</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-scale" style="animation-delay: 0.3s;">
+                    <img src="https://picsum.photos/400/400?random=4" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">Midjourney v6</p>
+                        <p class="text-white/70 text-xs">Sci-Fi Scene</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-scale hidden md:block" style="animation-delay: 0.4s;">
+                    <img src="https://picsum.photos/400/400?random=5" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">Leonardo AI</p>
+                        <p class="text-white/70 text-xs">Character Design</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-scale hidden md:block" style="animation-delay: 0.5s;">
+                    <img src="https://picsum.photos/400/400?random=6" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">Adobe Firefly</p>
+                        <p class="text-white/70 text-xs">Product Shot</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-scale hidden lg:block" style="animation-delay: 0.6s;">
+                    <img src="https://picsum.photos/400/400?random=7" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">Stable XL</p>
+                        <p class="text-white/70 text-xs">Nature Scene</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-scale hidden lg:block" style="animation-delay: 0.7s;">
+                    <img src="https://picsum.photos/400/400?random=8" alt="AI Art">
+                    <div class="overlay">
+                        <p class="text-white text-sm font-bold">Midjourney</p>
+                        <p class="text-white/70 text-xs">Architecture</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Models -->
+    <section id="models" class="py-20" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 reveal">
+                <span class="font-semibold text-sm uppercase tracking-wider"
+                    style="color: var(--primary)">Compatibility</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2" style="color: var(--text-primary)">Supported AI Models
+                </h2>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                <div class="model-badge reveal-scale"><span class="w-3 h-3 rounded-full gradient-bg-primary"></span>
+                    Midjourney</div>
+                <div class="model-badge reveal-scale" style="animation-delay: 0.05s;"><span
+                        class="w-3 h-3 rounded-full bg-green-500"></span> DALL-E 3</div>
+                <div class="model-badge reveal-scale" style="animation-delay: 0.1s;"><span
+                        class="w-3 h-3 rounded-full bg-blue-500"></span> Stable Diffusion</div>
+                <div class="model-badge reveal-scale" style="animation-delay: 0.15s;"><span
+                        class="w-3 h-3 rounded-full bg-orange-500"></span> Leonardo AI</div>
+                <div class="model-badge reveal-scale" style="animation-delay: 0.2s;"><span
+                        class="w-3 h-3 rounded-full bg-pink-500"></span> Adobe Firefly</div>
+                <div class="model-badge reveal-scale" style="animation-delay: 0.25s;"><span
+                        class="w-3 h-3 rounded-full bg-cyan-500"></span> Ideogram</div>
+                <div class="model-badge reveal-scale" style="animation-delay: 0.3s;"><span
+                        class="w-3 h-3 rounded-full bg-yellow-500"></span> Playground AI</div>
+                <div class="model-badge reveal-scale" style="animation-delay: 0.35s;"><span
+                        class="w-3 h-3 rounded-full bg-red-500"></span> Flux</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20" style="background: var(--bg-primary)">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 reveal">
+                <span class="font-semibold text-sm uppercase tracking-wider"
+                    style="color: var(--primary)">Testimonials</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2" style="color: var(--text-primary)">Loved by Creators
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="testimonial-card reveal-scale">
+                    <div class="flex items-center gap-1 text-amber-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-6" style="color: var(--text-secondary)">"Finally found a tool that actually works!
+                        Saved me hours of guessing prompts."</p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full gradient-bg-primary flex items-center justify-center text-white font-bold">
+                            A</div>
+                        <div>
+                            <p class="font-bold text-sm" style="color: var(--text-primary)">Alex Chen</p>
+                            <p class="text-xs" style="color: var(--text-muted)">Digital Artist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal-scale" style="animation-delay: 0.1s;">
+                    <div class="flex items-center gap-1 text-amber-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-6" style="color: var(--text-secondary)">"The accuracy is insane. It even detected the
+                        exact Midjourney version!"</p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full gradient-bg-cool flex items-center justify-center text-white font-bold">
+                            S</div>
+                        <div>
+                            <p class="font-bold text-sm" style="color: var(--text-primary)">Sarah Miller</p>
+                            <p class="text-xs" style="color: var(--text-muted)">AI Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal-scale" style="animation-delay: 0.2s;">
+                    <div class="flex items-center gap-1 text-amber-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="mb-6" style="color: var(--text-secondary)">"Use it daily for inspiration. The prompt
+                        variations feature is a game changer."</p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center text-white font-bold">
+                            M</div>
+                        <div>
+                            <p class="font-bold text-sm" style="color: var(--text-primary)">Mike Johnson</p>
+                            <p class="text-xs" style="color: var(--text-muted)">Content Creator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 reveal">
+                <span class="font-semibold text-sm uppercase tracking-wider" style="color: var(--primary)">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2" style="color: var(--text-primary)">Common Questions</h2>
+            </div>
+
+            <div class="max-w-2xl mx-auto">
+                <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+                    <div class="faq-question" style="color: var(--text-primary)">
+                        How accurate is the analysis?
+                        <i class="faq-icon fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer" style="color: var(--text-secondary)">
+                        Our AI achieves 90%+ accuracy for most popular models like Midjourney, DALL-E, and Stable
+                        Diffusion. Accuracy varies based on image quality and how heavily the image was edited.
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="animation-delay: 0.1s;" onclick="this.classList.toggle('open')">
+                    <div class="faq-question" style="color: var(--text-primary)">
+                        Is my uploaded image stored?
+                        <i class="faq-icon fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer" style="color: var(--text-secondary)">
+                        No. All processing happens in your browser. We never store, save, or transmit your images to any
+                        server. Your privacy is our priority.
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="animation-delay: 0.2s;" onclick="this.classList.toggle('open')">
+                    <div class="faq-question" style="color: var(--text-primary)">
+                        Is it really free?
+                        <i class="faq-icon fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer" style="color: var(--text-secondary)">
+                        Yes! The core analyzer is completely free with no limits. We may add premium features in the
+                        future, but basic analysis will always be free.
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="animation-delay: 0.3s;" onclick="this.classList.toggle('open')">
+                    <div class="faq-question" style="color: var(--text-primary)">
+                        Can I analyze video?
+                        <i class="faq-icon fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer" style="color: var(--text-secondary)">
+                        Currently we support images only. Video analysis is on our roadmap and coming soon!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Developer -->
+    <section class="py-20" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
+                    <!-- Decorative gradient -->
+                    <div class="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl opacity-20"
+                        style="background: linear-gradient(135deg, #7C3AED, #EC4899);"></div>
+
+                    <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                        <!-- Profile Image -->
+                        <div class="relative">
+                            <div class="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl border-4"
+                                style="border-color: var(--primary)">
+                                <img src="assets/images/hallu-dodamani.png" alt="Hallu Dodamani"
+                                    class="w-full h-full object-cover" style="object-position: center 20%;">
+                            </div>
+                            <div
+                                class="absolute -bottom-2 -right-2 w-10 h-10 gradient-bg-primary rounded-xl flex items-center justify-center text-white text-lg shadow-lg">
+                                <i class="fas fa-code"></i>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1 text-center md:text-left">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3"
+                                style="background: rgba(124, 58, 237, 0.1); color: var(--primary)">
+                                <i class="fas fa-wand-magic-sparkles"></i> Creator
+                            </span>
+                            <h3 class="text-2xl md:text-3xl font-black mb-2" style="color: var(--text-primary)">
+                                Meet <span class="gradient-text">Hallu Dodamani</span>
+                            </h3>
+                            <p class="mb-6" style="color: var(--text-secondary)">
+                                Full Stack Developer & AI Enthusiast crafting beautiful web experiences.
+                                Passionate about bridging the gap between AI and human creativity.
+                            </p>
+                            <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                                <a href="about.html"
+                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white gradient-bg-primary hover:opacity-90 transition shadow-lg">
+                                    <i class="fas fa-user"></i> About Me
+                                </a>
+                                <a href="https://github.com/CodingWithDodamani" target="_blank"
+                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition glass"
+                                    style="color: var(--text-primary)">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                                <a href="https://linkedin.com/in/halludodamani" target="_blank"
+                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition glass"
+                                    style="color: var(--text-primary)">
+                                    <i class="fab fa-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 gradient-bg-primary opacity-90"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-3xl md:text-5xl font-black text-white mb-6 reveal">Ready to Decode?</h2>
+            <p class="text-xl text-white/80 mb-10 max-w-xl mx-auto reveal" style="animation-delay: 0.1s;">Upload your
+                first image and discover the secrets behind any AI artwork.</p>
+            <a href="#analyzer"
+                class="inline-flex items-center gap-3 bg-white text-purple-600 px-10 py-5 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 reveal"
+                style="animation-delay: 0.2s;">
+                <i class="fas fa-wand-magic-sparkles"></i> Start Analyzing — It's Free
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color)">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 gradient-bg-primary rounded-xl flex items-center justify-center text-white">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg" style="color: var(--text-primary)">PromptVision</span>
+                        <p class="text-xs" style="color: var(--text-muted)">AI Image Analyzer</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 text-sm" style="color: var(--text-secondary)">
+                    <a href="about.html" class="hover:text-purple-500 transition">About</a>
+                    <a href="pricing.html" class="hover:text-purple-500 transition">Pricing</a>
+                    <a href="changelog.html" class="hover:text-purple-500 transition">Changelog</a>
+                    <a href="privacy.html" class="hover:text-purple-500 transition">Privacy</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--text-muted)">&copy; 2025 PromptVision AI by <a
+                    href="about.html" class="hover:text-purple-500 transition font-medium">Hallu Dodamani</a>. Made with
+                <i class="fas fa-heart text-red-500"></i> for AI creators.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast"
+        class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl hidden z-50 glass glow">
+        <div id="toastIconWrapper" class="w-8 h-8 rounded-full flex items-center justify-center">
+            <i id="toastIcon" class="fas"></i>
+        </div>
+        <span id="toastMessage" class="font-medium" style="color: var(--text-primary)">Message</span>
+    </div>
+
+    <!-- Comparison Mode Section -->
+    <section id="compareSection" class="hidden py-12" style="background: var(--bg-tertiary)">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--text-primary)">
+                        <i class="fas fa-columns text-purple-500"></i> Compare Mode
+                    </h3>
+                    <p style="color: var(--text-secondary)">Upload two images to compare their prompts side-by-side</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div onclick="uploadCompareImage(0)" class="drop-zone rounded-2xl p-8 text-center cursor-pointer">
+                        <div id="comparePlaceholder0">
+                            <i class="fas fa-image text-4xl mb-3" style="color: var(--text-muted)"></i>
+                            <p class="font-medium" style="color: var(--text-secondary)">Click to upload Image 1</p>
+                        </div>
+                        <img id="comparePreview0" class="hidden w-full h-40 object-cover rounded-lg" alt="Image 1">
+                    </div>
+                    <div onclick="uploadCompareImage(1)" class="drop-zone rounded-2xl p-8 text-center cursor-pointer">
+                        <div id="comparePlaceholder1">
+                            <i class="fas fa-image text-4xl mb-3" style="color: var(--text-muted)"></i>
+                            <p class="font-medium" style="color: var(--text-secondary)">Click to upload Image 2</p>
+                        </div>
+                        <img id="comparePreview1" class="hidden w-full h-40 object-cover rounded-lg" alt="Image 2">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="compareAnalyzeBtn" onclick="analyzeCompare()"
+                        class="hidden btn-primary text-white px-8 py-3 rounded-xl font-bold">
+                        <i class="fas fa-balance-scale"></i> Compare Now
+                    </button>
+                </div>
+                <div id="compareResults" class="hidden mt-8"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Batch Analysis Section -->
+    <section id="batchSection" class="hidden py-12" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--text-primary)">
+                        <i class="fas fa-layer-group text-purple-500"></i> Batch Analysis
+                    </h3>
+                    <p style="color: var(--text-secondary)">Analyze up to 5 images at once</p>
+                </div>
+                <div id="batchGrid" class="grid grid-cols-3 md:grid-cols-5 gap-4 mb-6">
+                    <button onclick="addBatchImage()"
+                        class="aspect-square rounded-xl border-2 border-dashed flex items-center justify-center"
+                        style="border-color: var(--border-color); color: var(--text-muted)">
+                        <i class="fas fa-plus text-2xl"></i>
+                    </button>
+                </div>
+                <div class="text-center">
+                    <button id="batchAnalyzeBtn" onclick="analyzeBatch()"
+                        class="hidden btn-primary text-white px-8 py-3 rounded-xl font-bold">
+                        <i class="fas fa-play"></i> Analyze All
+                    </button>
+                </div>
+                <div id="batchResults" class="hidden mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Modal -->
+    <div id="templatesModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4"
+        style="background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);">
+        <div class="w-full max-w-4xl max-h-[80vh] overflow-hidden rounded-2xl" style="background: var(--bg-secondary)">
+            <div class="flex items-center justify-between p-6 border-b" style="border-color: var(--border-color)">
+                <h3 class="text-xl font-bold flex items-center gap-2" style="color: var(--text-primary)">
+                    <i class="fas fa-palette text-purple-500"></i> Prompt Templates
+                </h3>
+                <button onclick="closeTemplates()" class="w-8 h-8 rounded-full flex items-center justify-center"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4 border-b flex gap-2 flex-wrap" style="border-color: var(--border-color)">
+                <button onclick="filterTemplates('all')"
+                    class="template-filter px-3 py-1 rounded-full text-sm font-medium bg-purple-500 text-white">All</button>
+                <button onclick="filterTemplates('Portrait')"
+                    class="template-filter px-3 py-1 rounded-full text-sm font-medium"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">Portrait</button>
+                <button onclick="filterTemplates('Anime')"
+                    class="template-filter px-3 py-1 rounded-full text-sm font-medium"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">Anime</button>
+                <button onclick="filterTemplates('Sci-Fi')"
+                    class="template-filter px-3 py-1 rounded-full text-sm font-medium"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">Sci-Fi</button>
+                <button onclick="filterTemplates('Fantasy')"
+                    class="template-filter px-3 py-1 rounded-full text-sm font-medium"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">Fantasy</button>
+                <button onclick="filterTemplates('Art Style')"
+                    class="template-filter px-3 py-1 rounded-full text-sm font-medium"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">Art Style</button>
+            </div>
+            <div id="templatesGrid" class="p-6 grid grid-cols-2 md:grid-cols-3 gap-4 overflow-y-auto max-h-[50vh]">
+            </div>
+        </div>
+    </div>
+
+    <!-- Onboarding Modal -->
+    <div id="onboardingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4"
+        style="background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);">
+        <div class="w-full max-w-lg rounded-3xl p-8" style="background: var(--bg-secondary)">
+            <div class="flex justify-end">
+                <button onclick="closeOnboarding()" class="text-sm" style="color: var(--text-muted)">Skip <i
+                        class="fas fa-arrow-right ml-1"></i></button>
+            </div>
+            <div id="onboardingContent"></div>
+        </div>
+    </div>
+
+    <!-- Mode Switcher Buttons (Add to analyzer section) -->
+    <div class="fixed bottom-6 right-6 flex flex-col gap-2 z-40">
+        <button onclick="showTemplates()"
+            class="w-12 h-12 rounded-full shadow-lg flex items-center justify-center gradient-bg-primary text-white hover:scale-110 transition"
+            title="Prompt Templates">
+            <i class="fas fa-palette"></i>
+        </button>
+        <button onclick="enableCompareMode()"
+            class="w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition"
+            style="background: #3B82F6;" title="Compare Mode">
+            <i class="fas fa-columns"></i>
+        </button>
+        <button onclick="enableBatchMode()"
+            class="w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition"
+            style="background: #10B981;" title="Batch Mode">
+            <i class="fas fa-layer-group"></i>
+        </button>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Floating Particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#7C3AED', '#F43F5E', '#06B6D4', '#FBBF24'];
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Reveal on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal, .reveal-scale').forEach(el => observer.observe(el));
+
+        // Global toggleTheme
+        window.toggleTheme = function () {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+            localStorage.setItem('theme', current === 'light' ? 'dark' : 'light');
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | PromptVision AI</title>
+    <meta name="description"
+        content="Privacy Policy for PromptVision AI - How we handle your data and protect your privacy.">
+    <meta name="theme-color" content="#7C3AED">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="antialiased mesh-bg">
+
+    <!-- Header -->
+    <header class="fixed top-0 inset-x-0 z-50 py-3">
+        <div class="container mx-auto px-4">
+            <div class="glass rounded-2xl px-5 py-2.5 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div
+                        class="w-9 h-9 gradient-bg-primary rounded-lg flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <i class="fas fa-wand-magic-sparkles text-sm"></i>
+                    </div>
+                    <span class="font-bold text-lg gradient-text hidden sm:block">PromptVision</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-1">
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Home</a>
+                    <a href="about.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">About</a>
+                    <a href="pricing.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Pricing</a>
+                    <a href="changelog.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Changelog</a>
+                    <a href="privacy.html" class="px-4 py-2 rounded-lg font-medium text-sm"
+                        style="background: rgba(124, 58, 237, 0.1); color: var(--primary)">Privacy</a>
+                </nav>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme"></button>
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg" style="color: var(--text-secondary)"
+                        onclick="document.getElementById('mobileMenu').classList.toggle('translate-x-full'); document.getElementById('menuOverlay').classList.toggle('hidden')">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="fixed inset-y-0 right-0 w-72 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col p-6"
+            style="background: var(--bg-secondary)">
+            <div class="flex items-center justify-between mb-8">
+                <span class="font-bold text-lg" style="color: var(--text-primary)">Menu</span>
+                <button
+                    onclick="document.getElementById('mobileMenu').classList.add('translate-x-full'); document.getElementById('menuOverlay').classList.add('hidden')"
+                    class="w-8 h-8 rounded-full flex items-center justify-center"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="index.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-home w-5 text-purple-500"></i> Home</a>
+                <a href="about.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-user w-5 text-green-500"></i> About</a>
+                <a href="pricing.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-tag w-5 text-orange-500"></i> Pricing</a>
+                <a href="changelog.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-code-branch w-5 text-blue-500"></i>
+                    Changelog</a>
+                <a href="privacy.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="background: rgba(124, 58, 237, 0.1); color: var(--primary)"><i
+                        class="fas fa-shield-halved w-5"></i> Privacy</a>
+            </div>
+        </div>
+        <div id="menuOverlay"
+            onclick="document.getElementById('mobileMenu').classList.add('translate-x-full'); this.classList.add('hidden')"
+            class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden"></div>
+    </header>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6"
+                    style="background: rgba(124, 58, 237, 0.1); color: var(--primary)">
+                    <i class="fas fa-shield-halved"></i> Privacy Policy
+                </span>
+                <h1 class="text-4xl md:text-5xl font-black mb-4" style="color: var(--text-primary)">
+                    Your Privacy <span class="gradient-text">Matters</span>
+                </h1>
+                <p class="text-lg" style="color: var(--text-secondary)">
+                    Last updated: January 1, 2025
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Highlights -->
+    <section class="py-12" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl"
+                        style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <h3 class="font-bold mb-2" style="color: var(--text-primary)">No Image Storage</h3>
+                    <p class="text-sm" style="color: var(--text-secondary)">Your images are never stored on our servers
+                    </p>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl"
+                        style="background: rgba(59, 130, 246, 0.1); color: #3B82F6;">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="font-bold mb-2" style="color: var(--text-primary)">Client-Side Processing</h3>
+                    <p class="text-sm" style="color: var(--text-secondary)">All analysis happens in your browser</p>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl"
+                        style="background: rgba(124, 58, 237, 0.1); color: #7C3AED;">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h3 class="font-bold mb-2" style="color: var(--text-primary)">No Tracking</h3>
+                    <p class="text-sm" style="color: var(--text-secondary)">We don't use cookies or trackers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto prose" style="color: var(--text-secondary)">
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-info-circle text-purple-500"></i> Overview
+                    </h2>
+                    <p>PromptVision AI ("we", "our", or "us") is committed to protecting your privacy. This Privacy
+                        Policy explains how we collect, use, and safeguard your information when you use our service.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-database text-blue-500"></i> Information We Collect
+                    </h2>
+                    <ul class="space-y-3">
+                        <li><strong style="color: var(--text-primary)">Images:</strong> Images you upload are processed
+                            locally in your browser and are NOT transmitted to our servers.</li>
+                        <li><strong style="color: var(--text-primary)">Local Storage:</strong> We store your preferences
+                            (theme, history) in your browser's local storage. This data never leaves your device.</li>
+                        <li><strong style="color: var(--text-primary)">API Keys:</strong> If you provide an API key, it
+                            is stored locally in your browser and used only to communicate with the AI service you've
+                            chosen.</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-cog text-green-500"></i> How We Use Information
+                    </h2>
+                    <ul class="space-y-3">
+                        <li>To provide image analysis functionality</li>
+                        <li>To remember your preferences and history</li>
+                        <li>To improve our service based on anonymous usage patterns</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-share-nodes text-orange-500"></i> Information Sharing
+                    </h2>
+                    <p>We do NOT sell, trade, or share your personal information with third parties. The only exception
+                        is when you use an external AI API (like Gemini), your image data is sent to that service
+                        according to their privacy policy.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-cookie text-yellow-500"></i> Cookies & Tracking
+                    </h2>
+                    <p>PromptVision does NOT use cookies, tracking pixels, or any analytics tools that collect personal
+                        data. Your browsing is completely private.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-lock text-red-500"></i> Data Security
+                    </h2>
+                    <p>Since all processing happens locally in your browser, your data is as secure as your own device.
+                        We recommend:</p>
+                    <ul class="space-y-2 mt-3">
+                        <li>Using a secure, updated browser</li>
+                        <li>Not sharing your device with untrusted users</li>
+                        <li>Clearing browser history if using a shared computer</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-child text-pink-500"></i> Children's Privacy
+                    </h2>
+                    <p>PromptVision is not intended for children under 13. We do not knowingly collect information from
+                        children.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-edit text-cyan-500"></i> Changes to This Policy
+                    </h2>
+                    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting
+                        the new policy on this page with an updated date.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-3" style="color: var(--text-primary)">
+                        <i class="fas fa-envelope text-purple-500"></i> Contact Us
+                    </h2>
+                    <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                    <a href="mailto:halludodamani@gmail.com"
+                        class="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-xl font-bold text-white gradient-bg-primary hover:opacity-90 transition">
+                        <i class="fas fa-paper-plane"></i> halludodamani@gmail.com
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color)">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 gradient-bg-primary rounded-lg flex items-center justify-center text-white text-sm">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <span class="font-bold" style="color: var(--text-primary)">PromptVision</span>
+                </div>
+                <div class="flex gap-6 text-sm" style="color: var(--text-secondary)">
+                    <a href="about.html" class="hover:text-purple-500 transition">About</a>
+                    <a href="pricing.html" class="hover:text-purple-500 transition">Pricing</a>
+                    <a href="changelog.html" class="hover:text-purple-500 transition">Changelog</a>
+                    <a href="privacy.html" class="hover:text-purple-500 transition">Privacy</a>
+                </div>
+                <p class="text-xs" style="color: var(--text-muted)">&copy; 2025 PromptVision AI</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+
+        window.toggleTheme = function () {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        };
+    </script>
+</body>
+
+</html>

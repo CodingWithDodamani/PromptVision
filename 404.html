@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | PromptVision AI</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Return to PromptVision AI.">
+    <meta name="theme-color" content="#7C3AED">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="antialiased mesh-bg min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed top-0 inset-x-0 z-50 py-3">
+        <div class="container mx-auto px-4">
+            <div class="glass rounded-2xl px-5 py-2.5 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div
+                        class="w-9 h-9 gradient-bg-primary rounded-lg flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <i class="fas fa-wand-magic-sparkles text-sm"></i>
+                    </div>
+                    <span class="font-bold text-lg gradient-text hidden sm:block">PromptVision</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Home</a>
+                    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 404 Content -->
+    <main class="flex-1 flex items-center justify-center pt-20 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <!-- 404 Number with Animation -->
+                <div class="relative mb-8">
+                    <h1 class="text-[180px] md:text-[240px] font-black leading-none gradient-text opacity-20">404</h1>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div
+                            class="w-32 h-32 md:w-40 md:h-40 rounded-full gradient-bg-primary flex items-center justify-center text-white text-5xl md:text-6xl shadow-2xl pulse-glow">
+                            <i class="fas fa-ghost"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message -->
+                <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--text-primary)">
+                    Oops! Page Not Found
+                </h2>
+                <p class="text-lg mb-8" style="color: var(--text-secondary)">
+                    The page you're looking for seems to have vanished into the AI void. <br class="hidden md:block">
+                    Don't worry, let's get you back on track!
+                </p>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html"
+                        class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg text-white gradient-bg-primary hover:opacity-90 transition shadow-xl">
+                        <i class="fas fa-home"></i> Go Home
+                    </a>
+                    <a href="index.html#analyzer"
+                        class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg transition glass-card"
+                        style="color: var(--text-primary)">
+                        <i class="fas fa-wand-magic-sparkles"></i> Try Analyzer
+                    </a>
+                </div>
+
+                <!-- Helpful Links -->
+                <div class="mt-12 pt-8 border-t" style="border-color: var(--border-color)">
+                    <p class="text-sm mb-4" style="color: var(--text-muted)">Or check out these pages:</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="about.html" class="text-sm font-medium hover:text-purple-500 transition"
+                            style="color: var(--text-secondary)">
+                            <i class="fas fa-user mr-1"></i> About
+                        </a>
+                        <a href="pricing.html" class="text-sm font-medium hover:text-purple-500 transition"
+                            style="color: var(--text-secondary)">
+                            <i class="fas fa-tag mr-1"></i> Pricing
+                        </a>
+                        <a href="changelog.html" class="text-sm font-medium hover:text-purple-500 transition"
+                            style="color: var(--text-secondary)">
+                            <i class="fas fa-code-branch mr-1"></i> Changelog
+                        </a>
+                        <a href="privacy.html" class="text-sm font-medium hover:text-purple-500 transition"
+                            style="color: var(--text-secondary)">
+                            <i class="fas fa-shield-halved mr-1"></i> Privacy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color)">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm" style="color: var(--text-muted)">&copy; 2025 PromptVision AI. Made by Hallu Dodamani</p>
+        </div>
+    </footer>
+
+    <script>
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+
+        window.toggleTheme = function () {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        };
+    </script>
+</body>
+
+</html>

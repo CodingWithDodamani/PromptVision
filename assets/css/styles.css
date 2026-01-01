@@ -1,0 +1,721 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ===== THEME VARIABLES ===== */
+:root {
+    --primary: #7C3AED;
+    --primary-dark: #6D28D9;
+    --secondary: #F43F5E;
+    --accent: #06B6D4;
+    --success: #10B981;
+    --warning: #FBBF24;
+
+    --gradient-1: linear-gradient(135deg, #7C3AED 0%, #DB2777 50%, #F59E0B 100%);
+    --gradient-2: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+    --gradient-3: linear-gradient(135deg, #EC4899 0%, #F43F5E 100%);
+    --gradient-mesh: radial-gradient(at 40% 20%, #7C3AED33 0px, transparent 50%),
+        radial-gradient(at 80% 0%, #F43F5E22 0px, transparent 50%),
+        radial-gradient(at 0% 50%, #06B6D422 0px, transparent 50%);
+
+    --bg-primary: #FAFAFA;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --border-color: #E5E7EB;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glow-color: rgba(124, 58, 237, 0.3);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #334155;
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-muted: #64748B;
+    --border-color: #334155;
+    --glass-bg: rgba(30, 41, 59, 0.8);
+    --glass-border: rgba(51, 65, 85, 0.5);
+    --glow-color: rgba(124, 58, 237, 0.5);
+    --gradient-mesh: radial-gradient(at 40% 20%, #7C3AED22 0px, transparent 50%),
+        radial-gradient(at 80% 0%, #F43F5E15 0px, transparent 50%),
+        radial-gradient(at 0% 50%, #06B6D415 0px, transparent 50%);
+}
+
+/* ===== BASE ===== */
+* {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    margin: 0;
+    overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* ===== GRADIENT MESH BACKGROUND ===== */
+.mesh-bg {
+    background-color: var(--bg-primary);
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+}
+
+/* ===== UTILITIES ===== */
+.gradient-text {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-bg-primary {
+    background: var(--gradient-1);
+}
+
+.gradient-bg-cool {
+    background: var(--gradient-2);
+}
+
+/* ===== GLASSMORPHISM ===== */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+}
+
+/* ===== GLOW EFFECTS ===== */
+.glow {
+    box-shadow: 0 0 30px var(--glow-color);
+}
+
+.glow-text {
+    text-shadow: 0 0 30px var(--glow-color);
+}
+
+.glow-border {
+    border: 1px solid transparent;
+    background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+        var(--gradient-1) border-box;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--glow-color);
+    }
+
+    50% {
+        box-shadow: 0 0 40px var(--glow-color), 0 0 60px rgba(124, 58, 237, 0.2);
+    }
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes particle-float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(20px);
+        opacity: 0;
+    }
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        border-color: var(--primary);
+    }
+
+    51%,
+    100% {
+        border-color: transparent;
+    }
+}
+
+.float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-fade-in {
+    animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-slide-left {
+    animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.animate-slide-right {
+    animation: slide-in-right 0.8s ease-out forwards;
+}
+
+.animate-scale {
+    animation: scale-in 0.6s ease-out forwards;
+}
+
+.gradient-animate {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+/* ===== PARTICLES ===== */
+.particle {
+    position: fixed;
+    pointer-events: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: particle-float 15s linear infinite;
+    z-index: 0;
+}
+
+.confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    z-index: 9999;
+    animation: confetti-fall 3s ease-out forwards;
+}
+
+/* ===== COMPONENTS ===== */
+.btn-primary {
+    background: var(--gradient-1);
+    background-size: 200% auto;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+}
+
+.btn-secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+    transform: translateY(-2px);
+}
+
+/* Drop Zone */
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    background: var(--bg-tertiary);
+    transition: all 0.3s;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+    border-color: var(--primary);
+    background: rgba(124, 58, 237, 0.05);
+    transform: scale(1.01);
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.1);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    width: 48px;
+    height: 24px;
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: background 0.3s;
+}
+
+.theme-toggle::after {
+    content: '☀️';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 2px;
+    left: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle::after {
+    content: '🌙';
+    transform: translateX(24px);
+    background: var(--bg-tertiary);
+}
+
+/* ===== CARDS ===== */
+.feature-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-1);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+/* Gallery Grid */
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '"';
+    font-size: 80px;
+    color: var(--primary);
+    opacity: 0.1;
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-family: Georgia, serif;
+}
+
+/* FAQ Accordion */
+.faq-item {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.faq-item:hover {
+    border-color: var(--primary);
+}
+
+.faq-question {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    background: var(--bg-secondary);
+    transition: background 0.3s;
+}
+
+.faq-question:hover {
+    background: var(--bg-tertiary);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+    padding: 0 20px;
+    background: var(--bg-tertiary);
+}
+
+.faq-item.open .faq-answer {
+    max-height: 200px;
+    padding: 16px 20px;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(180deg);
+}
+
+/* Model Badge */
+.model-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.model-badge:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+/* Comparison Slider */
+.comparison-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.comparison-slider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+    cursor: ew-resize;
+    z-index: 10;
+}
+
+.comparison-slider::after {
+    content: '↔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.6s ease-out;
+}
+
+.reveal-scale.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== MOBILE MENU ===== */
+#mobileMenu.open {
+    transform: translateX(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .glass {
+        backdrop-filter: blur(10px);
+    }
+
+    .particle {
+        display: none;
+    }
+}
+
+/* ===== TOAST ===== */
+#toast {
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ===== PASTE INDICATOR ===== */
+.paste-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    padding: 40px 60px;
+    z-index: 100;
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+.paste-indicator.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ===== TYPING EFFECT ===== */
+.typing-text {
+    overflow: hidden;
+    border-right: 2px solid var(--primary);
+    white-space: nowrap;
+    animation: typewriter 3s steps(40) 1s forwards, blink 0.8s infinite;
+    width: 0;
+}
+
+/* ===== MARQUEE ===== */
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}

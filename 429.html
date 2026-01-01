@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>429 - Rate Limit Exceeded | PromptVision AI</title>
+    <meta name="description" content="You've reached the rate limit. Please try again later.">
+    <meta name="theme-color" content="#7C3AED">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse-slow {
+            animation: pulse-slow 2s ease-in-out infinite;
+        }
+
+        @keyframes countdown {
+            0% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: 283;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased mesh-bg min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed top-0 inset-x-0 z-50 py-3">
+        <div class="container mx-auto px-4">
+            <div class="glass rounded-2xl px-5 py-2.5 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div
+                        class="w-9 h-9 gradient-bg-primary rounded-lg flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <i class="fas fa-wand-magic-sparkles text-sm"></i>
+                    </div>
+                    <span class="font-bold text-lg gradient-text hidden sm:block">PromptVision</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Home</a>
+                    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 429 Content -->
+    <main class="flex-1 flex items-center justify-center pt-20 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <!-- 429 Number with Animation -->
+                <div class="relative mb-8">
+                    <h1 class="text-[140px] md:text-[200px] font-black leading-none opacity-10" style="color: #F59E0B;">
+                        429</h1>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center text-white text-5xl md:text-6xl shadow-2xl pulse-slow"
+                            style="background: linear-gradient(135deg, #F59E0B, #EF4444);">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message -->
+                <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--text-primary)">
+                    Whoa, Slow Down! 🚦
+                </h2>
+                <p class="text-lg mb-6" style="color: var(--text-secondary)">
+                    You've hit the rate limit. We need a moment to catch our breath!
+                </p>
+
+                <!-- Rate Limit Info Card -->
+                <div class="glass-card rounded-2xl p-6 mb-8 max-w-md mx-auto">
+                    <div class="flex items-center justify-center gap-2 mb-4">
+                        <i class="fas fa-shield-halved text-xl" style="color: #F59E0B;"></i>
+                        <span class="font-bold" style="color: var(--text-primary)">Rate Limit Protection</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="p-3 rounded-xl" style="background: var(--bg-tertiary)">
+                            <div class="font-bold text-lg" style="color: #F59E0B;">5</div>
+                            <div style="color: var(--text-muted)">per hour</div>
+                        </div>
+                        <div class="p-3 rounded-xl" style="background: var(--bg-tertiary)">
+                            <div class="font-bold text-lg" style="color: #F59E0B;">15</div>
+                            <div style="color: var(--text-muted)">per day</div>
+                        </div>
+                    </div>
+                    <p class="text-xs mt-4" style="color: var(--text-muted)">
+                        Limits reset every hour/day to ensure fair usage for everyone.
+                    </p>
+                </div>
+
+                <!-- Timer Suggestion -->
+                <div class="flex items-center justify-center gap-3 mb-8 p-4 rounded-xl"
+                    style="background: rgba(245, 158, 11, 0.1);">
+                    <i class="fas fa-clock text-2xl" style="color: #F59E0B;"></i>
+                    <span style="color: var(--text-primary)">Try again in <strong>~1 hour</strong> or come back
+                        tomorrow!</span>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html"
+                        class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg text-white gradient-bg-primary hover:opacity-90 transition shadow-xl">
+                        <i class="fas fa-home"></i> Go Home
+                    </a>
+                    <a href="pricing.html"
+                        class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg transition glass-card"
+                        style="color: var(--text-primary)">
+                        <i class="fas fa-crown"></i> Upgrade Plan
+                    </a>
+                </div>
+
+                <!-- Helpful Tips -->
+                <div class="mt-12 pt-8 border-t" style="border-color: var(--border-color)">
+                    <p class="text-sm mb-4" style="color: var(--text-muted)">💡 Tips while you wait:</p>
+                    <div class="flex flex-wrap justify-center gap-4 text-sm">
+                        <span style="color: var(--text-secondary)">
+                            <i class="fas fa-book mr-1"></i> Browse prompt templates
+                        </span>
+                        <span style="color: var(--text-secondary)">
+                            <i class="fas fa-history mr-1"></i> Check your history
+                        </span>
+                        <span style="color: var(--text-secondary)">
+                            <i class="fas fa-images mr-1"></i> View the gallery
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color)">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm" style="color: var(--text-muted)">&copy; 2025 PromptVision AI by <a href="about.html"
+                    class="hover:text-purple-500 transition font-medium">Hallu Dodamani</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+
+        window.toggleTheme = function () {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        };
+    </script>
+</body>
+
+</html>

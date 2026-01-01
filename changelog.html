@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog | PromptVision AI</title>
+    <meta name="description" content="See what's new in PromptVision AI - version history and updates.">
+    <meta name="theme-color" content="#7C3AED">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="antialiased mesh-bg">
+
+    <!-- Header -->
+    <header class="fixed top-0 inset-x-0 z-50 py-3">
+        <div class="container mx-auto px-4">
+            <div class="glass rounded-2xl px-5 py-2.5 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div
+                        class="w-9 h-9 gradient-bg-primary rounded-lg flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <i class="fas fa-wand-magic-sparkles text-sm"></i>
+                    </div>
+                    <span class="font-bold text-lg gradient-text hidden sm:block">PromptVision</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-1">
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Home</a>
+                    <a href="about.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">About</a>
+                    <a href="pricing.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Pricing</a>
+                    <a href="changelog.html" class="px-4 py-2 rounded-lg font-medium text-sm"
+                        style="background: rgba(124, 58, 237, 0.1); color: var(--primary)">Changelog</a>
+                    <a href="privacy.html"
+                        class="px-4 py-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium text-sm"
+                        style="color: var(--text-secondary)">Privacy</a>
+                </nav>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme"></button>
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg" style="color: var(--text-secondary)"
+                        onclick="document.getElementById('mobileMenu').classList.toggle('translate-x-full'); document.getElementById('menuOverlay').classList.toggle('hidden')">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="fixed inset-y-0 right-0 w-72 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col p-6"
+            style="background: var(--bg-secondary)">
+            <div class="flex items-center justify-between mb-8">
+                <span class="font-bold text-lg" style="color: var(--text-primary)">Menu</span>
+                <button
+                    onclick="document.getElementById('mobileMenu').classList.add('translate-x-full'); document.getElementById('menuOverlay').classList.add('hidden')"
+                    class="w-8 h-8 rounded-full flex items-center justify-center"
+                    style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="index.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-home w-5 text-purple-500"></i> Home</a>
+                <a href="about.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-user w-5 text-green-500"></i> About</a>
+                <a href="pricing.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-tag w-5 text-orange-500"></i> Pricing</a>
+                <a href="changelog.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="background: rgba(124, 58, 237, 0.1); color: var(--primary)"><i
+                        class="fas fa-code-branch w-5"></i> Changelog</a>
+                <a href="privacy.html" class="p-3 rounded-xl font-medium flex items-center gap-3"
+                    style="color: var(--text-primary)"><i class="fas fa-shield-halved w-5 text-red-500"></i> Privacy</a>
+            </div>
+        </div>
+        <div id="menuOverlay"
+            onclick="document.getElementById('mobileMenu').classList.add('translate-x-full'); this.classList.add('hidden')"
+            class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden"></div>
+    </header>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6"
+                    style="background: rgba(124, 58, 237, 0.1); color: var(--primary)">
+                    <i class="fas fa-code-branch"></i> Changelog
+                </span>
+                <h1 class="text-4xl md:text-5xl font-black mb-4" style="color: var(--text-primary)">
+                    What's New in <span class="gradient-text">PromptVision</span>
+                </h1>
+                <p class="text-lg" style="color: var(--text-secondary)">
+                    All the latest features, improvements, and fixes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Changelog -->
+    <section class="py-12" style="background: var(--bg-secondary)">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+
+                <!-- v3.0 -->
+                <div class="mb-12">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="px-4 py-2 rounded-full font-bold text-white gradient-bg-primary">v3.0</span>
+                        <span class="text-sm font-medium" style="color: var(--text-muted)">January 1, 2024</span>
+                        <span
+                            class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Latest</span>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="font-bold text-lg mb-4" style="color: var(--text-primary)">Major Visual & Feature
+                            Upgrade</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Comparison Mode - Compare 2 images
+                                    side-by-side</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Batch Analysis - Analyze multiple images at
+                                    once</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Prompt Templates library with 20+
+                                    styles</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Onboarding tutorial for first-time
+                                    users</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">IMPROVED</span>
+                                <span style="color: var(--text-secondary)">Premium visual design with particles &
+                                    animations</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">IMPROVED</span>
+                                <span style="color: var(--text-secondary)">New hero section with animated SVG
+                                    illustration</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">IMPROVED</span>
+                                <span style="color: var(--text-secondary)">Loading skeleton states for better UX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- v2.0 -->
+                <div class="mb-12">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="px-4 py-2 rounded-full font-bold"
+                            style="background: var(--bg-tertiary); color: var(--text-primary)">v2.0</span>
+                        <span class="text-sm font-medium" style="color: var(--text-muted)">December 28, 2023</span>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="font-bold text-lg mb-4" style="color: var(--text-primary)">Core Features Release</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Gemini Vision API integration (demo
+                                    mode)</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">History feature with localStorage
+                                    persistence</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">URL input - paste image links directly</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Export results as PNG or JSON</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Prompt Variations generator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- v1.0 -->
+                <div class="mb-12">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="px-4 py-2 rounded-full font-bold"
+                            style="background: var(--bg-tertiary); color: var(--text-primary)">v1.0</span>
+                        <span class="text-sm font-medium" style="color: var(--text-muted)">December 20, 2023</span>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="font-bold text-lg mb-4" style="color: var(--text-primary)">Initial Release</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Core image analysis with simulated
+                                    results</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Drag & drop and clipboard paste
+                                    support</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Dark mode with system preference
+                                    detection</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">PWA support for offline access</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">NEW</span>
+                                <span style="color: var(--text-secondary)">Keyboard shortcuts (Ctrl+V, Ctrl+D,
+                                    Enter)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color)">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 gradient-bg-primary rounded-lg flex items-center justify-center text-white text-sm">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <span class="font-bold" style="color: var(--text-primary)">PromptVision</span>
+                </div>
+                <div class="flex gap-6 text-sm" style="color: var(--text-secondary)">
+                    <a href="about.html" class="hover:text-purple-500 transition">About</a>
+                    <a href="changelog.html" class="hover:text-purple-500 transition">Changelog</a>
+                    <a href="#" class="hover:text-purple-500 transition">Privacy</a>
+                </div>
+                <p class="text-xs" style="color: var(--text-muted)">&copy; 2024 PromptVision AI</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+
+        window.toggleTheme = function () {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        };
+    </script>
+</body>
+
+</html>
