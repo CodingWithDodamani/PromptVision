@@ -431,8 +431,17 @@ async function callGeminiAPI() {
         if (err.message === 'RATE_LIMITED') {
             return null; // Don't fall back to demo for rate limits
         }
-        showToast('API error, using demo mode', 'error');
-        return DEMO_RESPONSES[Math.floor(Math.random() * DEMO_RESPONSES.length)];
+        // Fallback demo response when API fails (e.g., testing locally without server)
+        showToast('API not available - showing demo data', 'info');
+        return {
+            prompt: "cinematic portrait of a cyberpunk street samurai, neon lights reflecting off rain-slicked streets, highly detailed, 8k resolution, octane render, unreal engine 5, volumetric lighting --ar 16:9 --v 5.2",
+            negativePrompt: "blurry, low quality, distorted, bad anatomy, watermark, text, signature",
+            model: "Midjourney v5.2",
+            confidence: 94,
+            style: "Cyberpunk, Cinematic",
+            tags: ["cyberpunk", "portrait", "neon", "cinematic"],
+            isDemoMode: true
+        };
     }
 }
 
