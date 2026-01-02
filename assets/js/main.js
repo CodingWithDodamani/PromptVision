@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', initializeApp);
 
 // ===== CONFIG =====
 const CONFIG = {
-    GEMINI_API_KEY: '', // User will add their key
-    DEMO_MODE: true,    // Use demo responses when no API key
     MAX_HISTORY: 10,
     MAX_BATCH: 5,       // Max images for batch analysis
     VARIATION_STYLES: [
@@ -51,34 +49,6 @@ const state = {
     batchResults: [],
     hasSeenOnboarding: localStorage.getItem('promptvision_onboarding') === 'true'
 };
-
-// ===== DEMO RESPONSES =====
-const DEMO_RESPONSES = [
-    {
-        prompt: "cinematic portrait of a cyberpunk street samurai, neon lights reflecting off rain-slicked streets, highly detailed, 8k resolution, octane render, unreal engine 5, volumetric lighting, cybernetic enhancements --ar 16:9 --v 5.2",
-        negativePrompt: "blurry, low quality, distorted, bad anatomy, watermark, text, signature",
-        model: "Midjourney v5.2",
-        confidence: 94,
-        style: "Cyberpunk, Cinematic",
-        tags: ["cyberpunk", "portrait", "neon", "cinematic"]
-    },
-    {
-        prompt: "ethereal fantasy landscape with floating islands, bioluminescent plants, magical aurora in the sky, studio ghibli style, soft watercolor textures, dreamy atmosphere --ar 16:9 --v 5",
-        negativePrompt: "realistic, photograph, harsh lighting, modern elements",
-        model: "Midjourney v5",
-        confidence: 87,
-        style: "Fantasy, Anime",
-        tags: ["fantasy", "landscape", "ghibli", "magical"]
-    },
-    {
-        prompt: "hyperrealistic close-up of a mechanical eye, intricate gears and circuits visible, golden and brass tones, macro photography style, dramatic lighting, steampunk aesthetic",
-        negativePrompt: "organic, blurry, low detail, cartoon",
-        model: "Stable Diffusion XL",
-        confidence: 91,
-        style: "Steampunk, Macro",
-        tags: ["steampunk", "macro", "mechanical", "detailed"]
-    }
-];
 
 // ===== DOM ELEMENTS =====
 const elements = {};
@@ -403,12 +373,14 @@ async function startAnalysis() {
         }
     }
 
-    // Get result (demo or API)
-    let result;
-    if (CONFIG.DEMO_MODE || !CONFIG.GEMINI_API_KEY) {
-        result = DEMO_RESPONSES[Math.floor(Math.random() * DEMO_RESPONSES.length)];
-    } else {
-        result = await callGeminiAPI();
+    // Always call the API - it handles demo mode server-side
+    const result = await callGeminiAPI();
+
+    if (!result) {
+        // Rate limited or error - already handled in callGeminiAPI
+        state.isAnalyzing = false;
+        elements.progressSection?.classList.add('hidden');
+        return;
     }
 
     state.currentResult = result;
@@ -516,6 +488,26 @@ function showResults(result) {
         img.src = state.currentImageData;
     }
 
+    // Demo/Real Mode Badge
+    const modeBadge = document.getElementById('modeBadge');
+    if (modeBadge) {
+        if (result.isDemoMode) {
+            modeBadge.innerHTML = `
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold" style="background: linear-gradient(135deg, #F59E0B, #D97706); color: white;">
+                    <i class="fas fa-flask"></i> Demo Mode
+                </span>
+                <span class="text-xs block mt-1" style="color: var(--text-muted)">This is sample data. Connect Gemini API for real analysis.</span>
+            `;
+        } else {
+            modeBadge.innerHTML = `
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold" style="background: linear-gradient(135deg, #10B981, #059669); color: white;">
+                    <i class="fas fa-robot"></i> AI Analyzed
+                </span>
+            `;
+        }
+        modeBadge.classList.remove('hidden');
+    }
+
     // Prompt
     const promptEl = document.getElementById('resultPrompt');
     if (promptEl) promptEl.textContent = `"${result.prompt}"`;
@@ -540,8 +532,10 @@ function showResults(result) {
     const negEl = document.getElementById('resultNegative');
     if (negEl) negEl.textContent = result.negativePrompt || 'N/A';
 
-    // Confetti
-    triggerConfetti();
+    // Confetti (only for real results)
+    if (!result.isDemoMode) {
+        triggerConfetti();
+    }
 }
 
 // ===== HISTORY =====

@@ -126,8 +126,41 @@ export default async function handler(req, res) {
         // Get API key from environment variable (secure, not exposed)
         const apiKey = process.env.GEMINI_API_KEY;
 
+        // If no API key, return demo response with clear indicator
         if (!apiKey) {
-            return res.status(500).json({ error: 'API key not configured' });
+            const DEMO_RESPONSES = [
+                {
+                    prompt: "cinematic portrait of a cyberpunk street samurai, neon lights reflecting off rain-slicked streets, highly detailed, 8k resolution, octane render, unreal engine 5, volumetric lighting --ar 16:9 --v 5.2",
+                    negativePrompt: "blurry, low quality, distorted, bad anatomy, watermark, text, signature",
+                    model: "Midjourney v5.2",
+                    confidence: 94,
+                    style: "Cyberpunk, Cinematic",
+                    tags: ["cyberpunk", "portrait", "neon", "cinematic"]
+                },
+                {
+                    prompt: "ethereal fantasy landscape with floating islands, bioluminescent plants, magical aurora in the sky, studio ghibli style, soft watercolor textures, dreamy atmosphere --ar 16:9 --v 5",
+                    negativePrompt: "realistic, photograph, harsh lighting, modern elements",
+                    model: "Midjourney v5",
+                    confidence: 87,
+                    style: "Fantasy, Anime",
+                    tags: ["fantasy", "landscape", "ghibli", "magical"]
+                },
+                {
+                    prompt: "hyperrealistic close-up of a mechanical eye, intricate gears and circuits visible, golden and brass tones, macro photography style, dramatic lighting, steampunk aesthetic",
+                    negativePrompt: "organic, blurry, low detail, cartoon",
+                    model: "Stable Diffusion XL",
+                    confidence: 91,
+                    style: "Steampunk, Macro",
+                    tags: ["steampunk", "macro", "mechanical", "detailed"]
+                }
+            ];
+
+            const demoResult = DEMO_RESPONSES[Math.floor(Math.random() * DEMO_RESPONSES.length)];
+            return res.status(200).json({
+                ...demoResult,
+                isDemoMode: true,
+                _remaining: 999 // Demo mode has unlimited "requests"
+            });
         }
 
         // Call Gemini API
@@ -187,8 +220,9 @@ Respond in JSON format:
         const jsonMatch = text.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
             const result = JSON.parse(jsonMatch[0]);
-            // Add remaining requests info
+            // Add remaining requests info and indicate this is real API
             result._remaining = rateCheck.remaining;
+            result.isDemoMode = false;
             return res.status(200).json(result);
         }
 
