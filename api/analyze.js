@@ -126,6 +126,9 @@ export default async function handler(req, res) {
         // Get API key from environment variable (secure, not exposed)
         const apiKey = process.env.GEMINI_API_KEY;
 
+        // Debug: Log if API key exists (not the actual key for security)
+        console.log('API Key configured:', apiKey ? 'Yes (length: ' + apiKey.length + ')' : 'No');
+
         // If no API key, return demo response with clear indicator
         if (!apiKey) {
             const DEMO_RESPONSES = [
@@ -159,7 +162,8 @@ export default async function handler(req, res) {
             return res.status(200).json({
                 ...demoResult,
                 isDemoMode: true,
-                _remaining: 999 // Demo mode has unlimited "requests"
+                _remaining: 999, // Demo mode has unlimited "requests"
+                _debug: 'No GEMINI_API_KEY environment variable found'
             });
         }
 
