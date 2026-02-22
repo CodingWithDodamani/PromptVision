@@ -706,67 +706,54 @@
             <div class="text-center mb-12 reveal">
                 <span class="font-semibold text-sm uppercase tracking-wider"
                     style="color: var(--primary)">Gallery</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2" style="color: var(--text-primary)">Analyzed Artworks
-                </h2>
-                <p class="mt-3 max-w-xl mx-auto" style="color: var(--text-secondary)">See what others have discovered
-                </p>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2" style="color: var(--text-primary)">Sample Analyses</h2>
+                <p class="mt-3 max-w-xl mx-auto" style="color: var(--text-secondary)">Click any image to load it and see the full analysis</p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                <div class="gallery-item reveal-scale">
-                    <img src="https://picsum.photos/400/400?random=1" alt="AI Art">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Fantasy Sample -->
+                <div class="gallery-item reveal-scale cursor-pointer" onclick="loadSampleImage('assets/images/sample-fantasy.png')">
+                    <img src="assets/images/sample-fantasy.png" alt="Fantasy Landscape - AI Art" loading="lazy">
                     <div class="overlay">
-                        <p class="text-white text-sm font-bold">Midjourney v5</p>
-                        <p class="text-white/70 text-xs">Cyberpunk Portrait</p>
+                        <p class="text-white text-sm font-bold"><i class="fas fa-wand-magic-sparkles mr-1"></i> Midjourney v5</p>
+                        <p class="text-white/70 text-xs mb-2">Fantasy Landscape</p>
+                        <span class="inline-block px-2 py-1 rounded-full text-xs bg-purple-500/50 text-white">Click to analyze</span>
                     </div>
                 </div>
-                <div class="gallery-item reveal-scale" style="animation-delay: 0.1s;">
-                    <img src="https://picsum.photos/400/400?random=2" alt="AI Art">
+                
+                <!-- Portrait Sample -->
+                <div class="gallery-item reveal-scale cursor-pointer" style="animation-delay: 0.1s;" onclick="loadSampleImage('assets/images/sample-portrait.png')">
+                    <img src="assets/images/sample-portrait.png" alt="Cyberpunk Portrait - AI Art" loading="lazy">
                     <div class="overlay">
-                        <p class="text-white text-sm font-bold">DALL-E 3</p>
-                        <p class="text-white/70 text-xs">Fantasy Landscape</p>
+                        <p class="text-white text-sm font-bold"><i class="fas fa-wand-magic-sparkles mr-1"></i> Midjourney v5.2</p>
+                        <p class="text-white/70 text-xs mb-2">Cyberpunk Portrait</p>
+                        <span class="inline-block px-2 py-1 rounded-full text-xs bg-purple-500/50 text-white">Click to analyze</span>
                     </div>
                 </div>
-                <div class="gallery-item reveal-scale" style="animation-delay: 0.2s;">
-                    <img src="https://picsum.photos/400/400?random=3" alt="AI Art">
+                
+                <!-- Landscape Sample -->
+                <div class="gallery-item reveal-scale cursor-pointer" style="animation-delay: 0.2s;" onclick="loadSampleImage('assets/images/sample-landscape.png')">
+                    <img src="assets/images/sample-landscape.png" alt="Epic Landscape - AI Art" loading="lazy">
                     <div class="overlay">
-                        <p class="text-white text-sm font-bold">Stable Diffusion</p>
-                        <p class="text-white/70 text-xs">Abstract Art</p>
+                        <p class="text-white text-sm font-bold"><i class="fas fa-wand-magic-sparkles mr-1"></i> Stable Diffusion XL</p>
+                        <p class="text-white/70 text-xs mb-2">Epic Landscape</p>
+                        <span class="inline-block px-2 py-1 rounded-full text-xs bg-purple-500/50 text-white">Click to analyze</span>
                     </div>
                 </div>
-                <div class="gallery-item reveal-scale" style="animation-delay: 0.3s;">
-                    <img src="https://picsum.photos/400/400?random=4" alt="AI Art">
-                    <div class="overlay">
-                        <p class="text-white text-sm font-bold">Midjourney v6</p>
-                        <p class="text-white/70 text-xs">Sci-Fi Scene</p>
-                    </div>
-                </div>
-                <div class="gallery-item reveal-scale hidden md:block" style="animation-delay: 0.4s;">
-                    <img src="https://picsum.photos/400/400?random=5" alt="AI Art">
-                    <div class="overlay">
-                        <p class="text-white text-sm font-bold">Leonardo AI</p>
-                        <p class="text-white/70 text-xs">Character Design</p>
-                    </div>
-                </div>
-                <div class="gallery-item reveal-scale hidden md:block" style="animation-delay: 0.5s;">
-                    <img src="https://picsum.photos/400/400?random=6" alt="AI Art">
-                    <div class="overlay">
-                        <p class="text-white text-sm font-bold">Adobe Firefly</p>
-                        <p class="text-white/70 text-xs">Product Shot</p>
-                    </div>
-                </div>
-                <div class="gallery-item reveal-scale hidden lg:block" style="animation-delay: 0.6s;">
-                    <img src="https://picsum.photos/400/400?random=7" alt="AI Art">
-                    <div class="overlay">
-                        <p class="text-white text-sm font-bold">Stable XL</p>
-                        <p class="text-white/70 text-xs">Nature Scene</p>
-                    </div>
-                </div>
-                <div class="gallery-item reveal-scale hidden lg:block" style="animation-delay: 0.7s;">
-                    <img src="https://picsum.photos/400/400?random=8" alt="AI Art">
-                    <div class="overlay">
-                        <p class="text-white text-sm font-bold">Midjourney</p>
-                        <p class="text-white/70 text-xs">Architecture</p>
+            </div>
+
+            <!-- Demo Screenshot -->
+            <div class="mt-12 max-w-4xl mx-auto reveal">
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <img src="assets/images/demo-screenshot.png" alt="PromptVision Demo" class="rounded-xl shadow-lg w-full md:w-1/2" loading="lazy">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary)">See It In Action</h3>
+                            <p class="mb-4" style="color: var(--text-secondary)">Our AI analyzes images to detect the model, style, parameters, and even reconstructs the original prompt used to create the artwork.</p>
+                            <a href="#analyzer" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold inline-flex items-center gap-2">
+                                <i class="fas fa-play"></i> Try It Now
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
