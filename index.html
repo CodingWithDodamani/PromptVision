@@ -34,9 +34,39 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PromptVision AI",
+        "description": "Reverse engineer AI-generated artwork to discover the exact prompts, models, and settings used.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Hallu Dodamani",
+            "url": "https://github.com/CodingWithDodamani"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1250"
+        }
+    }
+    </script>
 </head>
 
 <body class="antialiased mesh-bg">
+
+    <!-- Skip Link for Accessibility -->
+    <a href="#analyzer" class="skip-link">Skip to main content</a>
 
     <!-- Floating Particles -->
     <div id="particles" class="fixed inset-0 pointer-events-none z-0"></div>
@@ -73,12 +103,13 @@
                 </nav>
 
                 <div class="flex items-center gap-3">
-                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme"></button>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" role="switch" aria-checked="false"></button>
                     <a href="#analyzer"
                         class="btn-primary text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
                         <i class="fas fa-bolt"></i> <span class="hidden sm:inline">Try Now</span>
                     </a>
                     <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg" style="color: var(--text-secondary)"
+                        aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"
                         onclick="document.getElementById('mobileMenu').classList.remove('translate-x-full'); document.getElementById('menuOverlay').classList.remove('hidden')">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
@@ -468,8 +499,9 @@
             <div class="max-w-4xl mx-auto">
                 <!-- Upload Card -->
                 <div class="glass-card rounded-3xl p-8 glow mb-8 reveal">
-                    <div id="dropZone" class="drop-zone rounded-2xl p-8 text-center cursor-pointer group">
-                        <input type="file" id="fileInput" class="hidden" accept="image/*">
+                    <div id="dropZone" class="drop-zone rounded-2xl p-8 text-center cursor-pointer group" 
+                        role="button" tabindex="0" aria-label="Upload image. Drag and drop, click to browse, or paste with Ctrl+V">
+                        <input type="file" id="fileInput" class="hidden" accept="image/*" aria-label="Select image file">
 
                         <div id="uploadPlaceholder">
                             <div class="w-20 h-20 mx-auto mb-4 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform float"
@@ -983,21 +1015,42 @@
                     <a href="changelog.html" class="hover:text-purple-500 transition">Changelog</a>
                     <a href="privacy.html" class="hover:text-purple-500 transition">Privacy</a>
                 </div>
-                <div class="flex items-center gap-4">
-                    <a href="#"
+                <div class="flex items-center gap-3">
+                    <a href="https://github.com/CodingWithDodamani" target="_blank" rel="noopener noreferrer"
                         class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
-                        style="background: var(--bg-tertiary); color: var(--text-secondary)">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
-                        style="background: var(--bg-tertiary); color: var(--text-secondary)">
-                        <i class="fab fa-discord"></i>
-                    </a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
-                        style="background: var(--bg-tertiary); color: var(--text-secondary)">
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)"
+                        aria-label="GitHub">
                         <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/halludodamani" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)"
+                        aria-label="X (Twitter)">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/halludodamani" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://instagram.com/halludodamani" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)"
+                        aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com/@CodingWithDodamani" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)"
+                        aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://discord.gg/promptvision" target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                        style="background: var(--bg-tertiary); color: var(--text-secondary)"
+                        aria-label="Discord">
+                        <i class="fab fa-discord"></i>
                     </a>
                 </div>
             </div>

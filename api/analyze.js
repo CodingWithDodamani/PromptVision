@@ -85,9 +85,35 @@ function checkRateLimit(ip) {
     };
 }
 
+// Allowed origins for CORS
+const ALLOWED_ORIGINS = [
+    'https://codingwithdodamani.github.io',
+    'https://promptvision-ai.vercel.app',
+    'http://localhost:3000',
+    'http://127.0.0.1:5500',
+    'http://localhost:5500'
+];
+
+// Validate base64 image data
+function validateImageData(data) {
+    if (!data || typeof data !== 'string') {
+        return { valid: false, error: 'No image data provided' };
+    }
+    if (data.length > 10 * 1024 * 1024) {
+        return { valid: false, error: 'Image too large (max 10MB)' };
+    }
+    if (!/^[A-Za-z0-9+/=]+$/.test(data)) {
+        return { valid: false, error: 'Invalid base64 format' };
+    }
+    return { valid: true };
+}
+
 export default async function handler(req, res) {
-    // Enable CORS
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Enable CORS (restrict to allowed origins)
+    const origin = req.headers.origin;
+    if (ALLOWED_ORIGINS.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -123,11 +149,19 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'No image data provided' });
         }
 
+        // Validate image data
+        const validation = validateImageData(imageData);
+        if (!validation.valid) {
+            return res.status(400).json({ error: validation.error });
+        }
+
         // Get API key from environment variable (secure, not exposed)
         const apiKey = process.env.GEMINI_API_KEY;
 
-        // Debug: Log if API key exists (not the actual key for security)
-        console.log('API Key configured:', apiKey ? 'Yes (length: ' + apiKey.length + ')' : 'No');
+        // Debug: Log if API key exists (only in development)
+        if (process.env.NODE_ENV !== 'production') {
+            console.log('API Key configured:', apiKey ? 'Yes' : 'No');
+        }
 
         // If no API key, return demo response with clear indicator
         if (!apiKey) {

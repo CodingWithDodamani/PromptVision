@@ -33,6 +33,34 @@ const CONFIG = {
     ]
 };
 
+// ===== DEMO RESPONSES (for comparison/batch modes when API unavailable) =====
+const DEMO_RESPONSES = [
+    {
+        prompt: "cinematic portrait of a cyberpunk street samurai, neon lights reflecting off rain-slicked streets, highly detailed, 8k resolution, octane render, unreal engine 5, volumetric lighting --ar 16:9 --v 5.2",
+        negativePrompt: "blurry, low quality, distorted, bad anatomy, watermark, text, signature",
+        model: "Midjourney v5.2",
+        confidence: 94,
+        style: "Cyberpunk, Cinematic",
+        tags: ["cyberpunk", "portrait", "neon", "cinematic"]
+    },
+    {
+        prompt: "ethereal fantasy landscape with floating islands, bioluminescent plants, magical aurora in the sky, studio ghibli style, soft watercolor textures, dreamy atmosphere --ar 16:9 --v 5",
+        negativePrompt: "realistic, photograph, harsh lighting, modern elements",
+        model: "Midjourney v5",
+        confidence: 87,
+        style: "Fantasy, Anime",
+        tags: ["fantasy", "landscape", "ghibli", "magical"]
+    },
+    {
+        prompt: "hyperrealistic close-up of a mechanical eye, intricate gears and circuits visible, golden and brass tones, macro photography style, dramatic lighting, steampunk aesthetic",
+        negativePrompt: "organic, blurry, low detail, cartoon",
+        model: "Stable Diffusion XL",
+        confidence: 91,
+        style: "Steampunk, Macro",
+        tags: ["steampunk", "macro", "mechanical", "detailed"]
+    }
+];
+
 // ===== STATE =====
 const state = {
     uploadedFiles: [],
@@ -272,9 +300,38 @@ window.loadSampleImage = async function (imagePath) {
 
 // ===== URL INPUT =====
 async function loadImageFromUrl(url) {
-    if (!url || !url.trim()) return;
+    if (!url || !url.trim()) {
+        showToast('Please enter a URL', 'error');
+        return;
+    }
 
     try {
+        // Validate URL format and protocol
+        const urlObj = new URL(url);
+        if (!['http:', 'https:'].includes(urlObj.protocol)) {
+            showToast('Invalid URL protocol. Use http or https.', 'error');
+            return;
+        }
+
+        // Block private IP ranges (SSRF protection)
+        const hostname = urlObj.hostname;
+        const privatePatterns = [
+            /^localhost$/i,
+            /^127\./,
+            /^10\./,
+            /^172\.(1[6-9]|2[0-9]|3[0-1])\./,
+            /^192\.168\./,
+            /^0\.0\.0\.0$/,
+            /\[::1\]/,
+            /^fc00:/i,
+            /^fe80:/i
+        ];
+
+        if (privatePatterns.some(p => p.test(hostname))) {
+            showToast('Cannot load images from private networks', 'error');
+            return;
+        }
+
         showToast('Loading image...', 'info');
 
         // Create an image to validate URL
@@ -300,7 +357,7 @@ async function loadImageFromUrl(url) {
         showToast('Image loaded from URL', 'success');
 
     } catch (err) {
-        showToast('Failed to load image from URL', 'error');
+        showToast('Failed to load image. Check URL and CORS settings.', 'error');
     }
 }
 
